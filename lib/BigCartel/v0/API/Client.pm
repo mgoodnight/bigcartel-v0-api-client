@@ -104,9 +104,13 @@ sub _query {
 }
 
 =head1 NAME
+
+    Big Cartel v0 API Client 
+
 =head1 SYNOPSIS
+
     use BigCartel::v0::API::Client;
-    
+
     my $client = BigCartel::v0::API::Client->new({
         sub_domain  => 'my_store'
     });
@@ -114,15 +118,27 @@ sub _query {
     my $products = $client->get_store_products;
 
 =head1 DESCRIPTION
+
     Client module to interface with the deprecated v0 API from BigCartel
 
 =head2 METHODS
+
+=over
+
 =item C<get_store_details>
+
     Request a store's details
+
 =item C<get_store_products>
+
     Request a store's list of products
+
 =item C<get_store_custom_page>
+
     Return a store's custom page details
+
+=back
+
 =cut
 
 1;
