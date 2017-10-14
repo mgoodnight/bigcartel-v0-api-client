@@ -60,7 +60,7 @@ sub get_store_details {
 }
 
 sub get_store_products {
-	my $self = shift;
+    my $self = shift;
     my $url = sprintf "%s/%s/products.json", $self->api_url, $self->sub_domain;
 
     my $content = $self->_query($url);
@@ -76,7 +76,7 @@ sub get_store_products {
 }
 
 sub get_store_custom_page {
-	my ($self, $permalink) = @_;
+    my ($self, $permalink) = @_;
     my $url = sprintf "%s/%s/page/%s.json", $self->api_url, $self->sub_domain, $permalink;
 
     my $content = $self->_query($url);
