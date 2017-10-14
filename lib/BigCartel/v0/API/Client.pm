@@ -72,7 +72,7 @@ sub get_store_products {
         warn "There was an issue deserializing response content.";
     };
 
-	return $deserialized_content;
+    return $deserialized_content;
 }
 
 sub get_store_custom_page {
@@ -88,7 +88,7 @@ sub get_store_custom_page {
         warn "There was an issue deserializing response content.";
     };
 
-	return $deserialized_content;
+    return $deserialized_content;
 }
 
 sub _query {
