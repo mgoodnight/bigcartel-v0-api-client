@@ -56,7 +56,7 @@ sub get_store_details {
         warn "There was an issue deserializing response content.";
     };
 
-	return $deserialized_content;
+    return $deserialized_content;
 }
 
 sub get_store_products {
