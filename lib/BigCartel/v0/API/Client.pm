@@ -8,7 +8,6 @@ use warnings;
 use Moo;
 use Furl;
 use IO::Socket::SSL;
-use Try::Tiny;
 use JSON qw/decode_json/;
 
 has sub_domain => (
@@ -47,48 +46,21 @@ sub get_store_details {
     my $self = shift;
     my $url = sprintf "%s/%s/store.json", $self->api_url, $self->sub_domain;
 
-    my $content = $self->_query($url);
-	my $deserialized_content;
-    try {
-        $deserialized_content = decode_json($content);
-    }
-    catch {
-        warn "There was an issue deserializing response content.";
-    };
-
-    return $deserialized_content;
+    return $self->_query($url);
 }
 
 sub get_store_products {
     my $self = shift;
     my $url = sprintf "%s/%s/products.json", $self->api_url, $self->sub_domain;
 
-    my $content = $self->_query($url);
-	my $deserialized_content;
-    try {
-        $deserialized_content = decode_json($content);
-    }
-    catch {
-        warn "There was an issue deserializing response content.";
-    };
-
-    return $deserialized_content;
+    return $self->_query($url);
 }
 
 sub get_store_custom_page {
     my ($self, $permalink) = @_;
     my $url = sprintf "%s/%s/page/%s.json", $self->api_url, $self->sub_domain, $permalink;
 
-    my $content = $self->_query($url);
-	my $deserialized_content;
-    try {
-        $deserialized_content = decode_json($content);
-    }
-    catch {
-        warn "There was an issue deserializing response content.";
-    };
-
-    return $deserialized_content;
+    return $self->_query($url);
 }
 
 sub _query {
