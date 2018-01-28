@@ -6,9 +6,7 @@ use strict;
 use warnings;
 
 use Moo;
-use Furl;
-use IO::Socket::SSL;
-use JSON qw/decode_json/;
+use LWP::UserAgent;
 
 has sub_domain => (
     is => 'rw',
@@ -25,10 +23,10 @@ has api_url => (
 has ua => (
     is      => 'ro',
     builder => sub {
-        return Furl->new(
+        return LWP::UserAgent->new(
             timeout  => 300,
             ssl_opts => {
-                SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_PEER(),
+                verify_hostname => 1
             }
         );
     }
@@ -64,9 +62,9 @@ sub get_store_custom_page {
 }
 
 sub _query {
-    my ($self, $extractor_url, $headers) = @_;
+    my ($self, $extractor_url) = @_;
 
-    my $response = $self->ua->get($extractor_url, $headers);
+    my $response = $self->ua->get($extractor_url);
     $self->_set_last_query_response($response);
     
     my $content_decoded = $response->decoded_content;
