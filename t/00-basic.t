@@ -3,7 +3,7 @@
 use strict; use warnings;
 
 use Test::Most;
-use LWP::UserAgent;
+use Furl;
 use FindBin qw/$Bin/;
 use lib "$Bin/../lib";
 use BigCartel::v0::API::Client;
@@ -22,10 +22,10 @@ foreach my $method ( map { chomp $_; $_; } <DATA> ) {
 }
 
 ok defined($client->ua), "We built our UserAgent.";
-isa_ok($client->ua, 'LWP::UserAgent');
+isa_ok($client->ua, 'Furl');
 
 dies_ok { $client->api_url('http://mgoodnight.com') } "Dies when trying to modify a read-only attribute (api_url).";
-dies_ok { $client->ua(LWP::UserAgent->new()) } "Dies when trying to modify a read-only attribute (ua).";
+dies_ok { $client->ua(Furl->new()) } "Dies when trying to modify a read-only attribute (ua).";
 
 done_testing();
 

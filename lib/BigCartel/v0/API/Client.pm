@@ -6,7 +6,8 @@ use strict;
 use warnings;
 
 use Moo;
-use LWP::UserAgent;
+use Furl;
+use IO::Socket::SSL;
 
 has sub_domain => (
     is => 'rw',
@@ -23,10 +24,10 @@ has api_url => (
 has ua => (
     is      => 'ro',
     builder => sub {
-        return LWP::UserAgent->new(
+        return Furl->new(
             timeout  => 300,
             ssl_opts => {
-                verify_hostname => 1
+                SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_PEER()
             }
         );
     }
