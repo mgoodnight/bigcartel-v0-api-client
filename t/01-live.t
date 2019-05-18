@@ -8,12 +8,10 @@ use FindBin qw/$Bin/;
 use lib "$Bin/../lib";
 use BigCartel::v0::API::Client;
 use JSON qw/decode_json/;
-use Data::Dumper;
 
 my $sub_domain = $ENV{BIGCARTEL_SUBDOMAIN};
-my $test_live = $ENV{TEST_LIVE};
 SKIP: {
-    skip "Missing test live environment variable, so we are skipping...", 4 unless ($test_live);
+    skip "Missing BigCartel subdomain environment variable, so we are skipping...", 4 unless ($sub_domain);
     my $client = BigCartel::v0::API::Client->new(sub_domain => $sub_domain);
 
     my $details_json = $client->get_store_details;
